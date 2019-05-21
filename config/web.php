@@ -68,7 +68,11 @@ $config = [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'product'], 
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'user'], 
             ],
-        ], 
+        ],  
+        'jwt' => [
+            'class' => 'sizeg\jwt\Jwt',
+            'key'   => '95C63B2D59534EE16CB93CE7C7C44',
+        ],
     ],
     'params' => $params,
 ];

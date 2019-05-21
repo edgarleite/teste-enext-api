@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use sizeg\jwt\Jwt;
+use sizeg\jwt\JwtHttpBearerAuth;
 
 /**
  * This is the model class for table "product".
