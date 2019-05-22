@@ -66,12 +66,19 @@ $config = [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'formula'], 
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'formula-product'], 
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'product'], 
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'user'], 
+                [
+                    'class' => 'yii\rest\UrlRule', 
+                    'controller' => 'user', 
+                    'extraPatterns' => [
+                        'GET login' => 'login',
+                    ], 
+                ], 
             ],
-        ],  
+        ], 
         'jwt' => [
+            // 'class' => 'bizley\jwt\Jwt',
             'class' => 'sizeg\jwt\Jwt',
-            'key'   => '95C63B2D59534EE16CB93CE7C7C44',
+            'key'   => 'testing',
         ],
     ],
     'params' => $params,

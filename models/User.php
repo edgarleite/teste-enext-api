@@ -2,30 +2,99 @@
 
 namespace app\models;
 
-class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
-{
-    public $id;
-    public $username;
-    public $password;
-    public $authKey;
-    public $accessToken;
+use Yii;
+use app\components\UserBehavior;
 
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
+/**
+ * This is the model class for table "user".
+ *
+ * @property int $id
+ * @property string $username
+ * @property string $password
+ * @property string $auth_key
+ * @property string $access_token
+ *
+ * @property Formula[] $formulas
+ * @property Product[] $products
+ */
+class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface 
+{
+    /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
+        return 'user';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['username', 'password'], 'required'],
+            [['username'], 'string', 'max' => 25],
+            [['password', 'auth_key', 'access_token'], 'string', 'max' => 255],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'username' => 'Username',
+            'password' => 'Password',
+            'auth_key' => 'Auth Key',
+            'access_token' => 'Access Token',
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+            UserBehavior::className(),
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->password = md5($this->password);
+                $this->auth_key = Yii::$app->security->generateRandomString();
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFormulas()
+    {
+        return $this->hasMany(Formula::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProducts()
+    {
+        return $this->hasMany(Product::className(), ['user_id' => 'id']);
+    }
 
     /**
      * {@inheritdoc}
@@ -41,7 +110,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     // public static function findIdentityByAccessToken($token, $type = null)
     // {
     //     foreach (self::$users as $user) {
-    //         if ($user['accessToken'] === $token) {
+    //         if ($user['access_token'] === $token) {
     //             return new static($user);
     //         }
     //     }
@@ -55,10 +124,10 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        foreach (self::$users as $user) {
-            if ($user['id'] === (string) $token->getClaim('uid')) {
-                return new static($user);
-            }
+        $user = self::find()->where(['id'] === $token->getClaim('uid'))->one();
+
+        if ($user !== null) {
+            return new static($user);
         }
 
         return null;
@@ -94,7 +163,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public function getAuthKey()
     {
-        return $this->authKey;
+        return $this->auth_key;
     }
 
     /**
@@ -102,7 +171,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public function validateAuthKey($authKey)
     {
-        return $this->authKey === $authKey;
+        return $this->auth_key === $authKey;
     }
 
     /**
