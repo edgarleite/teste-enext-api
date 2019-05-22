@@ -3,8 +3,7 @@
 namespace app\models;
 
 use Yii;
-use sizeg\jwt\Jwt;
-use sizeg\jwt\JwtHttpBearerAuth;
+use app\components\ProductBehavior;
 
 /**
  * This is the model class for table "product".
@@ -54,6 +53,16 @@ class Product extends \yii\db\ActiveRecord
             'basf' => 'Basf',
             'brand' => 'Brand',
             'vegetalization' => 'Vegetalization',
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+            ProductBehavior::className(),
         ];
     }
 
