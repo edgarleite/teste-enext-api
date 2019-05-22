@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-use app\components\ProductBehavior;
+use app\components\UserBehavior;
 
 /**
  * This is the model class for table "product".
@@ -34,8 +34,8 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'inci_name', 'brand'], 'required'],
             [['user_id', 'basf', 'vegetalization'], 'integer'],
+            [['inci_name', 'brand'], 'required'],
             [['inci_name', 'brand'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -62,7 +62,7 @@ class Product extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            ProductBehavior::className(),
+            UserBehavior::className(),
         ];
     }
 
@@ -80,5 +80,14 @@ class Product extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return ProductQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new ProductQuery(get_called_class());
     }
 }
