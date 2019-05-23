@@ -72,15 +72,9 @@ $config = [
             'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'formula'], 
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'formula-product'], 
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'product'], 
-                [
-                    'class' => 'yii\rest\UrlRule', 
-                    'controller' => 'formula', 
-                    'extraPatterns' => [
-                        'POST calculate' => 'calculate',
-                    ], 
-                ], 
                 [
                     'class' => 'yii\rest\UrlRule', 
                     'controller' => 'user', 

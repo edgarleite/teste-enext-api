@@ -31,10 +31,16 @@ class FormulaController extends \yii\rest\ActiveController
         return $behaviors;
     }
 
+    public function actions() {
+        $actions = parent::actions();
+        unset($actions['create']);
+        return $actions;
+    }
+
 	/**
-	 * Calculates formula
+	 * Creates formula
 	 */
-	public function actionCalculate() 
+	public function actionCreate() 
 	{
 		$formula = new Formula();
 		$formula->attributes = Yii::$app->request->post('formula');
@@ -72,7 +78,6 @@ class FormulaController extends \yii\rest\ActiveController
 
 		if ($countProducts > 0) {
 			foreach ($formula->formulaProducts as $key => $formulaProduct) {
-				// I(F1) = C(P1) * I(P1) + C(P2) * I(P2) 
 				$vegetalization += $formulaProduct->product_concentration * ($formulaProduct->product->vegetalization / 100);
 			}
 
