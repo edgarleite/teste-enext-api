@@ -16,6 +16,8 @@ use Yii;
  */
 class Formula extends \yii\db\ActiveRecord
 {
+    public $data = [];
+
     /**
      * {@inheritdoc}
      */

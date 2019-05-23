@@ -9,7 +9,7 @@ use Yii;
  *
  * @property int $formula_id
  * @property int $product_id
- * @property string $product_ concentration
+ * @property string $product_concentration
  *
  * @property Formula $formula
  * @property Product $product
@@ -30,9 +30,9 @@ class FormulaProduct extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['formula_id', 'product_id', 'product_ concentration'], 'required'],
+            [['formula_id', 'product_id', 'product_concentration'], 'required'],
             [['formula_id', 'product_id'], 'integer'],
-            [['product_ concentration'], 'number'],
+            [['product_concentration'], 'number'],
             [['formula_id'], 'exist', 'skipOnError' => true, 'targetClass' => Formula::className(), 'targetAttribute' => ['formula_id' => 'id']],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],
         ];
@@ -46,7 +46,7 @@ class FormulaProduct extends \yii\db\ActiveRecord
         return [
             'formula_id' => 'Formula ID',
             'product_id' => 'Product ID',
-            'product_ concentration' => 'Product Concentration',
+            'product_concentration' => 'Product Concentration',
         ];
     }
 
