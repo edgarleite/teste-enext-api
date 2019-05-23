@@ -63,23 +63,6 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             UserBehavior::className(),
         ];
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function beforeSave($insert)
-    {
-        if (parent::beforeSave($insert)) {
-            if ($this->isNewRecord) {
-                $this->password = md5($this->password);
-                $this->auth_key = Yii::$app->security->generateRandomString();
-            }
-
-            return true;
-        }
-
-        return false;
-    }
     
     /**
      * @return \yii\db\ActiveQuery
