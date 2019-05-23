@@ -17,7 +17,7 @@ class ProductQuery extends \yii\db\ActiveQuery
      */
     public function user()
     {
-        return $this->andWhere(['user_id' => Yii::$app->user->identity->id]);
+        return $this->andWhere(['user_id' => Yii::$app->user->identity->id])->orWhere(['user_id' => null]);
     }
 
     /**
