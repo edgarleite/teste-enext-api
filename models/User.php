@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use app\components\UserBehavior;
+use Lcobucci\JWT\Signer\Hmac\Sha256;
 
 /**
  * This is the model class for table "user".
@@ -124,7 +125,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        $user = self::find()->where(['id'] === $token->getClaim('uid'))->one();
+        $user = self::find()->where(['id' => $token->getClaim('uid')])->one();
 
         if ($user !== null) {
             return new static($user);
@@ -141,13 +142,31 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function findByUsername($username)
     {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
+        return self::find()->where(['username' => $username])->one();
+    }
 
-        return null;
+    
+    /**
+     * Generate JWT
+     * @return string
+     */
+    public static function generateToken(\app\models\User $user)
+    {
+        $signer = new Sha256();
+
+        $token = Yii::$app->jwt->getBuilder()
+            ->setIssuer('http://localhost:8888') // Configures the issuer (iss claim)
+            ->setAudience('http://localhost:8888') // Configures the audience (aud claim)
+            ->setId('4f1g23a12aa', true) // Configures the id (jti claim), replicating as a header item
+            ->setIssuedAt(time()) // Configures the time that the token was issue (iat claim)
+            ->setNotBefore(time() + 60) // Configures the time before which the token cannot be accepted (nbf claim)
+            ->setExpiration(time() + 3600) // Configures the expiration time of the token (exp claim)
+            ->set('uid', $user->id) // Configures a new claim, called "uid"
+            ->set('username', $user->username) // Configures a new claim, called "uid"
+            ->sign($signer, 'testing') // creates a signature using "testing" as key
+            ->getToken(); // Retrieves the generated token
+
+        return (string) $token;
     }
 
     /**
@@ -182,6 +201,6 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public function validatePassword($password)
     {
-        return $this->password === $password;
+        return $this->password === md5($password);
     }
 }

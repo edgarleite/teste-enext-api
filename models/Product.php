@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-use app\components\UserBehavior;
+use app\components\ProductBehavior;
 
 /**
  * This is the model class for table "product".
@@ -62,7 +62,7 @@ class Product extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            UserBehavior::className(),
+            ProductBehavior::className(),
         ];
     }
 

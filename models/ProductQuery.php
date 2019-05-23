@@ -9,10 +9,10 @@ namespace app\models;
  */
 class ProductQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
+    public function user()
     {
-        return $this->andWhere('[[status]]=1');
-    }*/
+        return $this->andWhere(['user_id' => 1]);
+    }
 
     /**
      * {@inheritdoc}
