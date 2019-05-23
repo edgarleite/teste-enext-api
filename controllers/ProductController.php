@@ -4,8 +4,8 @@ namespace app\controllers;
 
 use Yii;
 use yii\data\ActiveDataProvider;
-use app\models\Product;
 use sizeg\jwt\JwtHttpBearerAuth;
+use app\models\Product;
 
 class ProductController extends \yii\rest\ActiveController
 {

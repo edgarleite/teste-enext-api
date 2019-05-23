@@ -51,6 +51,17 @@ class FormulaProduct extends \yii\db\ActiveRecord
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function fields()
+    {
+        $fields = parent::fields();
+        $fields[] = 'product';
+
+        return $fields;
+    }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getFormula()

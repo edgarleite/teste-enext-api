@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\components\FormulaBehavior;
 
 /**
  * This is the model class for table "formula".
@@ -10,6 +11,7 @@ use Yii;
  * @property int $id
  * @property int $user_id
  * @property string $name
+ * @property int $vegetalization
  *
  * @property User $user
  * @property FormulaProduct[] $formulaProducts
@@ -34,6 +36,7 @@ class Formula extends \yii\db\ActiveRecord
         return [
             [['user_id', 'name'], 'required'],
             [['user_id'], 'integer'],
+            [['vegetalization'], 'number'],
             [['name'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -48,7 +51,29 @@ class Formula extends \yii\db\ActiveRecord
             'id' => 'ID',
             'user_id' => 'User ID',
             'name' => 'Name',
+            'vegetalization' => 'Vegetalization',
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+            FormulaBehavior::className(),
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function fields()
+    {
+        $fields = parent::fields();
+        $fields[] = 'formulaProducts';
+
+        return $fields;
     }
 
     /**
