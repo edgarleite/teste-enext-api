@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use Yii;
+
 /**
  * This is the ActiveQuery class for [[Product]].
  *
@@ -9,9 +11,13 @@ namespace app\models;
  */
 class ProductQuery extends \yii\db\ActiveQuery
 {
+    /**
+     * {@inheritdoc}
+     * @return Product[]|array
+     */
     public function user()
     {
-        return $this->andWhere(['user_id' => 1]);
+        return $this->andWhere(['user_id' => Yii::$app->user->identity->id]);
     }
 
     /**

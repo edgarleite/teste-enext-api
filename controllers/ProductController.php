@@ -3,7 +3,8 @@
 namespace app\controllers;
 
 use Yii;
-// use bizley\jwt\JwtHttpBearerAuth;
+use yii\data\ActiveDataProvider;
+use app\models\Product;
 use sizeg\jwt\JwtHttpBearerAuth;
 
 class ProductController extends \yii\rest\ActiveController
@@ -22,5 +23,19 @@ class ProductController extends \yii\rest\ActiveController
         ];
 
         return $behaviors;
+    }
+
+    public function actions() {
+        $actions = parent::actions();
+        unset($actions['index']);
+        return $actions;
+    }
+
+    public function actionIndex() {
+        $activeData = new ActiveDataProvider([
+            'query' => Product::find()->user(),
+            'pagination' => false
+        ]);
+        return $activeData;
     }
 }
