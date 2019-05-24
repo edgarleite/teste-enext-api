@@ -5,8 +5,8 @@
 REQUERIMENTOS
 ------------
 
-PHP 5.7.0
-MySQL 5.7.25
+- PHP 5.7.0
+- MySQL 5.7.25
 
 *Desenvolvido com Framework Yii 2  - Basic Project -  [Yii 2](http://www.yiiframework.com/)*
 
@@ -27,18 +27,18 @@ http://localhost/teste-enext-api/web/
 ESTRUTURA DE DIRETÓRIOS
 -------------------
 
-    assets/            a definição de ativos
+    assets/       a definição de ativos
     commands/     comandos do console (controladores)
     components/   componentes  da aplicação
-    config/            configurações da aplicação
-    controllers/      classes dos controllers
-    mail/                arquivos de visualização para e-mails
-    models/           classes dos models
-    runtime/          arquivos gerados durante o tempo de execução
-    tests/              vários testes para o aplicativo básico
-    vendor/           pacotes de terceiros dependentes
-    views/             arquivos das views
-    web/               script de entrada e os recursos da web
+    config/       configurações da aplicação
+    controllers/  classes dos controllers
+    mail/         arquivos de visualização para e-mails
+    models/       classes dos models
+    runtime/      arquivos gerados durante o tempo de execução
+    tests/        vários testes para o aplicativo básico
+    vendor/       pacotes de terceiros dependentes
+    views/        arquivos das views
+    web/          script de entrada e os recursos da web
 
 CONFIGURAÇÃO
 -------------
@@ -61,7 +61,7 @@ return [
 - O Yii não criará o banco de dados para você, isso deve ser feito manualmente antes que você possa acessá-lo. Utilize o arquivo `database.sql` que está na raíz do projeto.
 
 **TESTE POSTMAN:**
-Importe o arquivo `Enext.postman_collection.json` que se encontra na raíz do projeto.
+- Importe o arquivo `Enext.postman_collection.json` que se encontra na raíz do projeto.
 
 ENDPOINTS
 -------
