@@ -1,0 +1,297 @@
+{
+	"info": {
+		"_postman_id": "4e495fa6-d7f6-4245-a0b0-7ede4731e31f",
+		"name": "Enext",
+		"description": "Teste API Enext",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Products List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "be7c22ee-677b-4e40-b410-6e234cd34d52",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6IjRmMWcyM2ExMmFhIn0.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODg4OCIsImF1ZCI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4ODg4IiwianRpIjoiNGYxZzIzYTEyYWEiLCJpYXQiOjE1NTg1Nzg4MjUsIm5iZiI6MTU1ODU3ODg4NSwiZXhwIjoxNTU4NTgyNDI1LCJ1aWQiOjEsInVzZXJuYW1lIjoidXNlcjFAdGVzdC5jb20ifQ.m4Ipx_Mp8EfpijGLDEoJ5TepKcjQbdqvOl0TXXorf9I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/teste-enext-api/web/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"teste-enext-api",
+								"web",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product Add",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6IjRmMWcyM2ExMmFhIn0.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODg4OCIsImF1ZCI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4ODg4IiwianRpIjoiNGYxZzIzYTEyYWEiLCJpYXQiOjE1NTg1NzgxNzgsIm5iZiI6MTU1ODU3ODIzOCwiZXhwIjoxNTU4NTgxNzc4LCJ1aWQiOjEsInVzZXJuYW1lIjoidXNlcjFAdGVzdC5jb20ifQ.aCnMbz0_Mz3l-KOOlmql7YP3r7Ui-wvdL6LXzERhI6M",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"inci_name\": \"TEST USER 1.1\", \n\t\"basf\": \"0\", \n\t\"brand\": \"Brand 1.1\", \n\t\"vegetalization\": \"20\" \n}"
+						},
+						"url": {
+							"raw": "http://localhost:8888/teste-enext-api/web/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"teste-enext-api",
+								"web",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products Suggest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6IjRmMWcyM2ExMmFhIn0.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODg4OCIsImF1ZCI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4ODg4IiwianRpIjoiNGYxZzIzYTEyYWEiLCJpYXQiOjE1NTg2NjQ5NDcsIm5iZiI6MTU1ODY2NTAwNywiZXhwIjoxNTU4NjY4NTQ3LCJ1aWQiOjEsInVzZXJuYW1lIjoidXNlcjFAdGVzdC5jb20ifQ.S_eBPc5ZOh0ol1lnlzlFydwFa9Rs1DnOSONN32PkqNo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/teste-enext-api/web/products/suggest?query=teste",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"teste-enext-api",
+								"web",
+								"products",
+								"suggest"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "teste"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Users Add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "user1@test.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8888/teste-enext-api/web/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"teste-enext-api",
+								"web",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Login",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8888/teste-enext-api/web/users/login?username=user1@test.com&password=123456",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"teste-enext-api",
+								"web",
+								"users",
+								"login"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "user1@test.com"
+								},
+								{
+									"key": "password",
+									"value": "123456"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Formulas",
+			"item": [
+				{
+					"name": "Formula Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6IjRmMWcyM2ExMmFhIn0.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODg4OCIsImF1ZCI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4ODg4IiwianRpIjoiNGYxZzIzYTEyYWEiLCJpYXQiOjE1NTg2NjM5ODQsIm5iZiI6MTU1ODY2NDA0NCwiZXhwIjoxNTU4NjY3NTg0LCJ1aWQiOjEsInVzZXJuYW1lIjoidXNlcjFAdGVzdC5jb20ifQ.gCFsoi4QqvTQ4m75q6lI6PJxfBKei0H1EM8zBfhSzWg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"formula\": {\n\t\t\"name\": \"My Formula 100\"\n\t}, \n\t\"formulaProducts\": [\n\t\t{\n\t\t\t\"product_id\": \"1\", \n\t\t\t\"product_concentration\": \"100\"\n\t\t}, \n\t\t{\n\t\t\t\"product_id\": \"2\", \n\t\t\t\"product_concentration\": \"100\"\n\t\t}, \n\t\t{\n\t\t\t\"product_id\": \"3\", \n\t\t\t\"product_concentration\": \"100\"\n\t\t}\n\t]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8888/teste-enext-api/web/formulas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"teste-enext-api",
+								"web",
+								"formulas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Formula show",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6IjRmMWcyM2ExMmFhIn0.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODg4OCIsImF1ZCI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4ODg4IiwianRpIjoiNGYxZzIzYTEyYWEiLCJpYXQiOjE1NTg3MDIwODMsIm5iZiI6MTU1ODcwMjE0MywiZXhwIjoxNTU4NzA1NjgzLCJ1aWQiOjEsInVzZXJuYW1lIjoidXNlcjFAdGVzdC5jb20ifQ.wlI-jGuadLlf_Fr-dTyaCsEQ9pBR8_5L36g7LpoXlUw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/teste-enext-api/web/formulas/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"teste-enext-api",
+								"web",
+								"formulas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

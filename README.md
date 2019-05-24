@@ -2,31 +2,13 @@
     <h1 align="center">BASF API</h1>
 </p>
 
-Usa o framework Yii 2  - Basic Project -  [Yii 2](http://www.yiiframework.com/) 
-
-ESTRUTURA DE DIRETÓRIOS
--------------------
-
-    assets/            a definição de ativos
-    commands/     comandos do console (controladores)
-    components/   comandos do console (controladores)
-    config/            configurações de aplicativos
-    controllers/      classes de controlador da Web
-    mail/                arquivos de visualização para e-mails
-    models/           classes de modelo
-    runtime/          arquivos gerados durante o tempo de execução
-    tests/              vários testes para o aplicativo básico
-    vendor/           pacotes de terceiros dependentes
-    views/             arquivos de visualização para o aplicativo da Web
-    web/               script de entrada e os recursos da Web
-
-
-
 REQUERIMENTOS
 ------------
 
-O requisito mínimo: PHP 5.7.0.
+PHP 5.7.0
+MySQL 5.7.25
 
+*Desenvolvido com Framework Yii 2  - Basic Project -  [Yii 2](http://www.yiiframework.com/)*
 
 INSTALAÇÃO
 ------------
@@ -41,6 +23,22 @@ Agora você deve poder acessar o aplicativo através do seguinte URL.
 ~~~
 http://localhost/teste-enext-api/web/
 ~~~
+
+ESTRUTURA DE DIRETÓRIOS
+-------------------
+
+    assets/            a definição de ativos
+    commands/     comandos do console (controladores)
+    components/   componentes  da aplicação
+    config/            configurações da aplicação
+    controllers/      classes dos controllers
+    mail/                arquivos de visualização para e-mails
+    models/           classes dos models
+    runtime/          arquivos gerados durante o tempo de execução
+    tests/              vários testes para o aplicativo básico
+    vendor/           pacotes de terceiros dependentes
+    views/             arquivos das views
+    web/               script de entrada e os recursos da web
 
 CONFIGURAÇÃO
 -------------
@@ -62,9 +60,13 @@ return [
 **NOTA:**
 - O Yii não criará o banco de dados para você, isso deve ser feito manualmente antes que você possa acessá-lo. Utilize o arquivo `database.sql` que está na raíz do projeto.
 
+**TESTE POSTMAN:**
+Importe o arquivo `Enext.postman_collection.json` que se encontra na raíz do projeto.
 
 ENDPOINTS
 -------
+
+#### ***Usuários***
 
 **Adicionar usuário:**
 
@@ -83,28 +85,6 @@ POST /users
         "auth_key": "ruX8Y1PJnmK3SB_BcYFiCnt-nDhKsD1u",
         "id": 3
     }
-
-**Listar usuários:**
-
-GET /users
-
-    // Resposta
-    [
-        {
-            "id": 1,
-            "username": "user1@test.com",
-            "password": "e10adc3949ba59abbe56e057f20f883e",
-            "auth_key": "xQ3u_PJn8DB5FWkm_QaGFeK0J7A80Sc_",
-            "access_token": null
-        },
-        {
-            "id": 2,
-            "username": "user2@test.com",
-            "password": "e10adc3949ba59abbe56e057f20f883e",
-            "auth_key": "LcMoHVe0Kv5xHIizy3a9modu4MCWX79Z",
-            "access_token": null
-        }
-    ]
 
 **Autenticar usuário:**
 
@@ -129,8 +109,10 @@ POST /users/login
     {
         "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6IjRmMWcyM2ExMmFhIn0.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODg4OCIsImF1ZCI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4ODg4IiwianRpIjoiNGYxZzIzYTEyYWEiLCJpYXQiOjE1NTg2OTgzOTUsIm5iZiI6MTU1ODY5ODQ1NSwiZXhwIjoxNTU4NzAxOTk1LCJ1aWQiOjEsInVzZXJuYW1lIjoidXNlcjFAdGVzdC5jb20ifQ.YGiwLwUFuWcPLNybnnGhFn56RVgiU4HSZlP9aeoel4A"
     }
-    
-**Listar produtos:**
+
+#### ***Produtos***
+
+**Listar produtos BASF e do usuário:**
 
 GET /products
 
@@ -186,7 +168,7 @@ GET /products
         }
     ]
 
-**Inserir producto**
+**Inserir produto**
 
 POST /products
 
@@ -208,11 +190,9 @@ POST /products
         "id": 9
     }
 
-**Sugestão de produtos**
+**Sugestão de produtos BASF e do usuário**
 
 GET /products/suggest
-
-
 
     // Parâmetros de requisição
     {
@@ -255,6 +235,8 @@ GET /products/suggest
         }
     ]
 
+#### ***Fórmula***
+
 **Criar fórmula**
 
 POST /formulas
@@ -286,7 +268,7 @@ POST /formulas
     {
         "name": "My Formula 100",
         "user_id": 1,
-        "id": 55,
+        "id": 1,
         "vegetalization": "46.67",
         "formulaProducts": [
             {
@@ -317,6 +299,59 @@ POST /formulas
             },
             {
                 "formula_id": 55,
+                "product_id": 3,
+                "product_concentration": "100.00",
+                "product": {
+                    "id": 3,
+                    "user_id": null,
+                    "inci_name": "BASF 3",
+                    "basf": 1,
+                    "brand": "BASF",
+                    "vegetalization": 20
+                }
+            }
+        ]
+    }
+
+**Exibir fórmula**
+
+GET /formulas/{id}
+
+    // Reposta
+    {
+        "id": 1,
+        "user_id": 1,
+        "name": "My Formula 1",
+        "vegetalization": "46.67",
+        "formulaProducts": [
+            {
+                "formula_id": 1,
+                "product_id": 1,
+                "product_concentration": "100.00",
+                "product": {
+                    "id": 1,
+                    "user_id": null,
+                    "inci_name": "BASF 1",
+                    "basf": 1,
+                    "brand": "BASF",
+                    "vegetalization": 70
+                }
+            },
+            {
+                "formula_id": 1,
+                "product_id": 2,
+                "product_concentration": "100.00",
+                "product": {
+                    "id": 2,
+                    "user_id": null,
+                    "inci_name": "BASF 2",
+                    "basf": 1,
+                    "brand": "BASF",
+                    "vegetalization": 50
+                }
+            },
+            {
+                "formula_id": 1,
                 "product_id": 3,
                 "product_concentration": "100.00",
                 "product": {
