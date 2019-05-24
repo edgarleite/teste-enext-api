@@ -1,8 +1,5 @@
 <p align="center">
-    <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
-    </a>
-    <h1 align="center">Yii 2 Basic Project Template</h1>
+    <h1 align="center">BASF API</h1>
     <br>
 </p>
 
@@ -17,217 +14,254 @@ features to your application.
 [![Total Downloads](https://img.shields.io/packagist/dt/yiisoft/yii2-app-basic.svg)](https://packagist.org/packages/yiisoft/yii2-app-basic)
 [![Build Status](https://travis-ci.org/yiisoft/yii2-app-basic.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-app-basic)
 
-DIRECTORY STRUCTURE
+ESTRUTURA DE DIRETÓRIOS
 -------------------
 
-      assets/             contains assets definition
-      commands/           contains console commands (controllers)
-      config/             contains application configurations
-      controllers/        contains Web controller classes
-      mail/               contains view files for e-mails
-      models/             contains model classes
-      runtime/            contains files generated during runtime
-      tests/              contains various tests for the basic application
-      vendor/             contains dependent 3rd-party packages
-      views/              contains view files for the Web application
-      web/                contains the entry script and Web resources
+    assets/            a definição de ativos
+    commands/     comandos do console (controladores)
+    components/   comandos do console (controladores)
+    config/            configurações de aplicativos
+    controllers/      classes de controlador da Web
+    mail/                arquivos de visualização para e-mails
+    models/           classes de modelo
+    runtime/          arquivos gerados durante o tempo de execução
+    tests/              vários testes para o aplicativo básico
+    vendor/           pacotes de terceiros dependentes
+    views/             arquivos de visualização para o aplicativo da Web
+    web/               script de entrada e os recursos da Web
 
 
 
-REQUIREMENTS
+REQUERIMENTOS
 ------------
 
-The minimum requirement by this project template that your Web server supports PHP 5.4.0.
+O requisito mínimo: PHP 5.7.0.
 
 
-INSTALLATION
+INSTALAÇÃO
 ------------
 
-### Install via Composer
+    cd /diretório-servidor-web-root
+    git clone https://github.com/edgarleite/teste-enext-api.git
+    cd teste-enext-api
+    composer install
 
-If you do not have [Composer](http://getcomposer.org/), you may install it by following the instructions
-at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
-
-You can then install this project template using the following command:
-
-~~~
-php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic basic
-~~~
-
-Now you should be able to access the application through the following URL, assuming `basic` is the directory
-directly under the Web root.
+Agora você deve poder acessar o aplicativo através do seguinte URL.
 
 ~~~
-http://localhost/basic/web/
+http://localhost/teste-enext-api/web/
 ~~~
 
-### Install from an Archive File
-
-Extract the archive file downloaded from [yiiframework.com](http://www.yiiframework.com/download/) to
-a directory named `basic` that is directly under the Web root.
-
-Set cookie validation key in `config/web.php` file to some random secret string:
-
-```php
-'request' => [
-    // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-    'cookieValidationKey' => '<secret random string goes here>',
-],
-```
-
-You can then access the application through the following URL:
-
-~~~
-http://localhost/basic/web/
-~~~
-
-
-### Install with Docker
-
-Update your vendor packages
-
-    docker-compose run --rm php composer update --prefer-dist
-    
-Run the installation triggers (creating cookie validation code)
-
-    docker-compose run --rm php composer install    
-    
-Start the container
-
-    docker-compose up -d
-    
-You can then access the application through the following URL:
-
-    http://127.0.0.1:8000
-
-**NOTES:** 
-- Minimum required Docker engine version `17.04` for development (see [Performance tuning for volume mounts](https://docs.docker.com/docker-for-mac/osxfs-caching/))
-- The default configuration uses a host-volume in your home directory `.docker-composer` for composer caches
-
-
-CONFIGURATION
+CONFIGURAÇÃO
 -------------
 
-### Database
+### Banco de dados
 
-Edit the file `config/db.php` with real data, for example:
+Edite o arquivo `config / db.php` com dados reais, por exemplo:
 
 ```php
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
+    'dsn' => 'mysql:host=localhost;dbname=teste-enext-api',
     'username' => 'root',
-    'password' => '1234',
+    'password' => 'root',
     'charset' => 'utf8',
 ];
 ```
 
-**NOTES:**
-- Yii won't create the database for you, this has to be done manually before you can access it.
-- Check and edit the other files in the `config/` directory to customize your application as required.
-- Refer to the README in the `tests` directory for information specific to basic application tests.
+**NOTA:**
+- O Yii não criará o banco de dados para você, isso deve ser feito manualmente antes que você possa acessá-lo.
 
 
-TESTING
+ENDPOINTS
 -------
 
-Tests are located in `tests` directory. They are developed with [Codeception PHP Testing Framework](http://codeception.com/).
-By default there are 3 test suites:
+**Adicionar usuário:**
 
-- `unit`
-- `functional`
-- `acceptance`
+POST /users
 
-Tests can be executed by running
-
-```
-vendor/bin/codecept run
-```
-
-The command above will execute unit and functional tests. Unit tests are testing the system components, while functional
-tests are for testing user interaction. Acceptance tests are disabled by default as they require additional setup since
-they perform testing in real browser. 
-
-
-### Running  acceptance tests
-
-To execute acceptance tests do the following:  
-
-1. Rename `tests/acceptance.suite.yml.example` to `tests/acceptance.suite.yml` to enable suite configuration
-
-2. Replace `codeception/base` package in `composer.json` with `codeception/codeception` to install full featured
-   version of Codeception
-
-3. Update dependencies with Composer 
-
-    ```
-    composer update  
-    ```
-
-4. Download [Selenium Server](http://www.seleniumhq.org/download/) and launch it:
-
-    ```
-    java -jar ~/selenium-server-standalone-x.xx.x.jar
-    ```
-
-    In case of using Selenium Server 3.0 with Firefox browser since v48 or Google Chrome since v53 you must download [GeckoDriver](https://github.com/mozilla/geckodriver/releases) or [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) and launch Selenium with it:
-
-    ```
-    # for Firefox
-    java -jar -Dwebdriver.gecko.driver=~/geckodriver ~/selenium-server-standalone-3.xx.x.jar
+    // Parâmetros de requisição
+    {
+        "username": "test1@test.com",
+        "password": "123456"
+    }
     
-    # for Google Chrome
-    java -jar -Dwebdriver.chrome.driver=~/chromedriver ~/selenium-server-standalone-3.xx.x.jar
-    ``` 
+    // Resposta
+    {
+        "username": "user2@test.com",
+        "password": "e10adc3949ba59abbe56e057f20f883e",
+        "auth_key": "ruX8Y1PJnmK3SB_BcYFiCnt-nDhKsD1u",
+        "id": 3
+    }
+
+**Listar usuários:**
+
+GET /users
+
+    // Resposta
+    [
+        {
+            "id": 1,
+            "username": "user1@test.com",
+            "password": "e10adc3949ba59abbe56e057f20f883e",
+            "auth_key": "xQ3u_PJn8DB5FWkm_QaGFeK0J7A80Sc_",
+            "access_token": null
+        },
+        {
+            "id": 2,
+            "username": "user2@test.com",
+            "password": "e10adc3949ba59abbe56e057f20f883e",
+            "auth_key": "LcMoHVe0Kv5xHIizy3a9modu4MCWX79Z",
+            "access_token": null
+        }
+    ]
+
+**Autenticar usuário:**
+
+POST /users/login
+
+
+    // Parâmetros de requisição
+    {
+        "username": "test1@test.com",
+        "password": "123456"
+    }
+
+    // Resposta
+    {
+        "status": true,
+        "message": "Success",
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6IjRmMWcyM2ExMmFhIn0.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODg4OCIsImF1ZCI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4ODg4IiwianRpIjoiNGYxZzIzYTEyYWEiLCJpYXQiOjE1NTg2OTgzOTUsIm5iZiI6MTU1ODY5ODQ1NSwiZXhwIjoxNTU4NzAxOTk1LCJ1aWQiOjEsInVzZXJuYW1lIjoidXNlcjFAdGVzdC5jb20ifQ.YGiwLwUFuWcPLNybnnGhFn56RVgiU4HSZlP9aeoel4A"
+}
+
+
+> ** Todos os demais métodos devem enviar o token de autorização nas requisições:**
+
+    {
+        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6IjRmMWcyM2ExMmFhIn0.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODg4OCIsImF1ZCI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4ODg4IiwianRpIjoiNGYxZzIzYTEyYWEiLCJpYXQiOjE1NTg2OTgzOTUsIm5iZiI6MTU1ODY5ODQ1NSwiZXhwIjoxNTU4NzAxOTk1LCJ1aWQiOjEsInVzZXJuYW1lIjoidXNlcjFAdGVzdC5jb20ifQ.YGiwLwUFuWcPLNybnnGhFn56RVgiU4HSZlP9aeoel4A"
+    }
     
-    As an alternative way you can use already configured Docker container with older versions of Selenium and Firefox:
+**Listar produtos:**
+
+GET /products
+
+    // Resposta
+    [
+        {
+            "id": 1,
+            "user_id": null,
+            "inci_name": "BASF 1",
+            "basf": 1,
+            "brand": "BASF",
+            "vegetalization": 70
+        },
+        {
+            "id": 2,
+            "user_id": null,
+            "inci_name": "BASF 2",
+            "basf": 1,
+            "brand": "BASF",
+            "vegetalization": 50
+        },
+        {
+            "id": 3,
+            "user_id": null,
+            "inci_name": "BASF 3",
+            "basf": 1,
+            "brand": "BASF",
+            "vegetalization": 20
+        },
+        {
+            "id": 4,
+            "user_id": null,
+            "inci_name": "BASF TESTE 4",
+            "basf": 1,
+            "brand": "BASF",
+            "vegetalization": 90
+        },
+        {
+            "id": 5,
+            "user_id": 1,
+            "inci_name": "TESTE USER 1.1",
+            "basf": 0,
+            "brand": "Brand 1.1",
+            "vegetalization": 20
+        },
+        {
+            "id": 6,
+            "user_id": 1,
+            "inci_name": "TESTE USER 1.2",
+            "basf": 0,
+            "brand": "Brand 1.2",
+            "vegetalization": 30
+        }
+    ]
+
+**Inserir producto**
+
+POST /products
+
+    // Parâmetros de requisição
+    {
+        "inci_name": "TESTE USER 2.1", 
+        "basf": "0", 
+        "brand": "Brand 2.1", 
+        "vegetalization": "20" 
+    }
     
-    ```
-    docker run --net=host selenium/standalone-firefox:2.53.0
-    ```
+    // Resposta
+    {
+        "inci_name": "TESTE USER 2.1",
+        "basf": "0",
+        "brand": "Brand 2.1",
+        "vegetalization": "20",
+        "user_id": 1,
+        "id": 9
+    }
 
-5. (Optional) Create `yii2_basic_tests` database and update it by applying migrations if you have them.
+**Sugestão de produtos**
 
-   ```
-   tests/bin/yii migrate
-   ```
-
-   The database configuration can be found at `config/test_db.php`.
+GET /products/suggest
 
 
-6. Start web server:
 
-    ```
-    tests/bin/yii serve
-    ```
-
-7. Now you can run all available tests
-
-   ```
-   # run all available tests
-   vendor/bin/codecept run
-
-   # run acceptance tests
-   vendor/bin/codecept run acceptance
-
-   # run only unit and functional tests
-   vendor/bin/codecept run unit,functional
-   ```
-
-### Code coverage support
-
-By default, code coverage is disabled in `codeception.yml` configuration file, you should uncomment needed rows to be able
-to collect code coverage. You can run your tests and collect coverage with the following command:
-
-```
-#collect coverage for all tests
-vendor/bin/codecept run -- --coverage-html --coverage-xml
-
-#collect coverage only for unit tests
-vendor/bin/codecept run unit -- --coverage-html --coverage-xml
-
-#collect coverage for unit and functional tests
-vendor/bin/codecept run functional,unit -- --coverage-html --coverage-xml
-```
-
-You can see code coverage output under the `tests/_output` directory.
+    // Parâmetros de requisição
+    {
+        "query": "teste"
+    }
+    
+    // Resposta
+    [
+        {
+            "id": 4,
+            "user_id": null,
+            "inci_name": "BASF TESTE 4",
+            "basf": 1,
+            "brand": "BASF",
+            "vegetalization": 90
+        },
+        {
+            "id": 5,
+            "user_id": 1,
+            "inci_name": "TESTE USER 1.1",
+            "basf": 0,
+            "brand": "Brand 1.1",
+            "vegetalization": 20
+        },
+        {
+            "id": 6,
+            "user_id": 1,
+            "inci_name": "TESTE USER 1.2",
+            "basf": 0,
+            "brand": "Brand 1.2",
+            "vegetalization": 30
+        },
+        {
+            "id": 9,
+            "user_id": 1,
+            "inci_name": "TESTE USER 2.1",
+            "basf": 0,
+            "brand": "Brand 2.1",
+            "vegetalization": 20
+        }
+    ]
