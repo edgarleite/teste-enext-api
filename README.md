@@ -68,29 +68,29 @@ ENDPOINTS
 #### ***Usuários***
 
 
-POST /users
-PUT /users/{id}
-POST /users/login
-POST /users/logout
-POST /users/recovery-password
+- POST /users
+- PUT /users/{id}
+- POST /users/login
+- POST /users/logout
+- POST /users/recovery-password
 
 
 #### ***Produtos***
 
-POST /products
-GET /products
-GET /products/{id}
-PUT /products/{id}
-DELETE /products/{id}
+- POST /products
+- GET /products
+- GET /products/{id}
+- PUT /products/{id}
+- DELETE /products/{id}
 
 
 #### ***Fórmulas***
 
-POST /formulas
-GET /formulas
-GET /formulas/{id}
-PUT /formulas/{id}
-DELETE /formulas/{id}
+- POST /formulas
+- GET /formulas
+- GET /formulas/{id}
+- PUT /formulas/{id}
+- DELETE /formulas/{id}
 
 
 ENDPOINTS IMPLEMENTADOS
