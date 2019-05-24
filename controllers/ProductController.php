@@ -25,15 +25,37 @@ class ProductController extends \yii\rest\ActiveController
         return $behaviors;
     }
 
+    /**
+     * Removes action to override
+     */
     public function actions() {
         $actions = parent::actions();
         unset($actions['index']);
         return $actions;
     }
 
+    /**
+     * Override index action
+     *
+     * @return ActiveDataProvider
+     */
     public function actionIndex() {
         $activeData = new ActiveDataProvider([
             'query' => Product::find()->user(),
+            'pagination' => false
+        ]);
+        return $activeData;
+    }
+
+    /**
+     * Find product from suggest
+     *
+     * @param string $query
+     * @return ActiveDataProvider
+     */
+    public function actionSuggest(string $query) {
+        $activeData = new ActiveDataProvider([
+            'query' => Product::find()->user()->suggest($query),
             'pagination' => false
         ]);
         return $activeData;

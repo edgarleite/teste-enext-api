@@ -74,7 +74,13 @@ $config = [
             'rules' => [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'formula'], 
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'formula-product'], 
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'product'], 
+                [
+                    'class' => 'yii\rest\UrlRule', 
+                    'controller' => 'product', 
+                    'extraPatterns' => [
+                        'GET suggest' => 'suggest',
+                    ], 
+                ], 
                 [
                     'class' => 'yii\rest\UrlRule', 
                     'controller' => 'user', 
