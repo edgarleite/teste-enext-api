@@ -1,18 +1,8 @@
 <p align="center">
     <h1 align="center">BASF API</h1>
-    <br>
 </p>
 
-Yii 2 Basic Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-rapidly creating small projects.
-
-The template contains the basic features including user login/logout and a contact page.
-It includes all commonly used configurations that would allow you to focus on adding new
-features to your application.
-
-[![Latest Stable Version](https://img.shields.io/packagist/v/yiisoft/yii2-app-basic.svg)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Total Downloads](https://img.shields.io/packagist/dt/yiisoft/yii2-app-basic.svg)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Build Status](https://travis-ci.org/yiisoft/yii2-app-basic.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-app-basic)
+Usa o framework Yii 2  - Basic Project -  [Yii 2](http://www.yiiframework.com/) 
 
 ESTRUTURA DE DIRETÓRIOS
 -------------------
@@ -41,7 +31,7 @@ O requisito mínimo: PHP 5.7.0.
 INSTALAÇÃO
 ------------
 
-    cd /diretório-servidor-web-root
+    cd /diretorio-servidor-web-root
     git clone https://github.com/edgarleite/teste-enext-api.git
     cd teste-enext-api
     composer install
@@ -57,7 +47,7 @@ CONFIGURAÇÃO
 
 ### Banco de dados
 
-Edite o arquivo `config / db.php` com dados reais, por exemplo:
+Edite o arquivo `config/db.php` com dados reais, por exemplo:
 
 ```php
 return [
@@ -70,7 +60,7 @@ return [
 ```
 
 **NOTA:**
-- O Yii não criará o banco de dados para você, isso deve ser feito manualmente antes que você possa acessá-lo.
+- O Yii não criará o banco de dados para você, isso deve ser feito manualmente antes que você possa acessá-lo. Utilize o arquivo `database.sql` que está na raíz do projeto.
 
 
 ENDPOINTS
@@ -134,8 +124,7 @@ POST /users/login
         "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6IjRmMWcyM2ExMmFhIn0.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODg4OCIsImF1ZCI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4ODg4IiwianRpIjoiNGYxZzIzYTEyYWEiLCJpYXQiOjE1NTg2OTgzOTUsIm5iZiI6MTU1ODY5ODQ1NSwiZXhwIjoxNTU4NzAxOTk1LCJ1aWQiOjEsInVzZXJuYW1lIjoidXNlcjFAdGVzdC5jb20ifQ.YGiwLwUFuWcPLNybnnGhFn56RVgiU4HSZlP9aeoel4A"
 }
 
-
-> ** Todos os demais métodos devem enviar o token de autorização nas requisições:**
+> Todos os demais métodos devem enviar o token de autorização nas requisições:
 
     {
         "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6IjRmMWcyM2ExMmFhIn0.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODg4OCIsImF1ZCI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4ODg4IiwianRpIjoiNGYxZzIzYTEyYWEiLCJpYXQiOjE1NTg2OTgzOTUsIm5iZiI6MTU1ODY5ODQ1NSwiZXhwIjoxNTU4NzAxOTk1LCJ1aWQiOjEsInVzZXJuYW1lIjoidXNlcjFAdGVzdC5jb20ifQ.YGiwLwUFuWcPLNybnnGhFn56RVgiU4HSZlP9aeoel4A"
@@ -265,3 +254,79 @@ GET /products/suggest
             "vegetalization": 20
         }
     ]
+
+**Criar fórmula**
+
+POST /formulas
+
+
+    // Parâmetros de requisição
+    
+    {
+        "formula": {
+            "name": "My Formula 100"
+        }, 
+        "formulaProducts": [
+            {
+                "product_id": "1", 
+                "product_concentration": "100"
+            }, 
+            {
+                "product_id": "2", 
+                "product_concentration": "100"
+            }, 
+            {
+                "product_id": "3", 
+                "product_concentration": "100"
+            }
+        ]
+    }
+    
+    // Resposta
+    {
+        "name": "My Formula 100",
+        "user_id": 1,
+        "id": 55,
+        "vegetalization": "46.67",
+        "formulaProducts": [
+            {
+                "formula_id": 55,
+                "product_id": 1,
+                "product_concentration": "100.00",
+                "product": {
+                    "id": 1,
+                    "user_id": null,
+                    "inci_name": "BASF 1",
+                    "basf": 1,
+                    "brand": "BASF",
+                    "vegetalization": 70
+                }
+            },
+            {
+                "formula_id": 55,
+                "product_id": 2,
+                "product_concentration": "100.00",
+                "product": {
+                    "id": 2,
+                    "user_id": null,
+                    "inci_name": "BASF 2",
+                    "basf": 1,
+                    "brand": "BASF",
+                    "vegetalization": 50
+                }
+            },
+            {
+                "formula_id": 55,
+                "product_id": 3,
+                "product_concentration": "100.00",
+                "product": {
+                    "id": 3,
+                    "user_id": null,
+                    "inci_name": "BASF 3",
+                    "basf": 1,
+                    "brand": "BASF",
+                    "vegetalization": 20
+                }
+            }
+        ]
+    }
